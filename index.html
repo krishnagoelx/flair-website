@@ -442,9 +442,9 @@ body{font-family:Schibsted Critical,Arial,sans-serif}
         if(cx-half<pad)s=pad-(cx-half);else if(cx+half>window.innerWidth-pad)s=(window.innerWidth-pad)-(cx+half);
         w.style.setProperty('--fd-shift',s.toFixed(1)+'px');
       }
-      function set(o){if(o)place();w.classList.toggle('flair-open',o);w.setAttribute('aria-expanded',String(o));d.setAttribute('aria-hidden',String(!o))}
-      w.addEventListener('pointerenter',place);
-      w.addEventListener('focus',place);
+      let pw=0;function watch(){if(pw)return;pw=setInterval(()=>{if(w.classList.contains('flair-open')||w.matches(':hover')||document.activeElement===w)place();else{clearInterval(pw);pw=0}},160)}function set(o){if(o){place();watch()}w.classList.toggle('flair-open',o);w.setAttribute('aria-expanded',String(o));d.setAttribute('aria-hidden',String(!o))}
+      w.addEventListener('pointerenter',()=>{place();watch()});
+      w.addEventListener('focus',()=>{place();watch()});
       window.addEventListener('scroll',()=>{if(w.classList.contains('flair-open')||w.matches(':hover'))place()},{passive:true});
       w.addEventListener('click',e=>{e.stopPropagation();set(!w.classList.contains('flair-open'))});
       w.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();set(!w.classList.contains('flair-open'))}else if(e.key==='Escape'){set(false);w.blur()}});
