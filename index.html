@@ -49,14 +49,21 @@ body{font-family:Schibsted Critical,Arial,sans-serif}
 .footer-links p{max-width:220px;margin:0}.footer-note{display:flex!important}
 .footer-art{--cell:min(4vw,45px);position:relative;width:calc(25*var(--cell));height:calc(8*var(--cell));max-width:100%;margin:20px auto 28px;isolation:isolate;perspective:900px;filter:drop-shadow(0 0 .75px rgba(40,48,43,.46)) drop-shadow(0 16px 15px rgba(31,38,33,.085))}
 .footer-art:before{position:absolute;z-index:-1;right:2%;bottom:-4%;left:2%;height:18%;border-radius:50%;background:rgba(38,46,40,.12);content:"";filter:blur(18px);opacity:.55;transform:scaleX(.94)}
+.footer-art:after{position:absolute;z-index:-2;inset:-17px -20px -14px;content:"";border:1px solid rgba(76,87,79,.18);border-radius:24px;background:linear-gradient(145deg,rgba(255,255,255,.28),rgba(255,255,255,.06));box-shadow:inset 0 1px rgba(255,255,255,.78),0 15px 38px rgba(35,44,38,.045);pointer-events:none}
 .footer-product{background-color:#e6e9e6!important}.footer-product{position:absolute;top:calc(var(--y)*var(--cell));left:calc(var(--x)*var(--cell));display:block;width:calc(var(--cell)*.94);height:calc(var(--cell)*.94);background-image:linear-gradient(145deg,rgba(255,255,255,.24),rgba(25,33,28,.035)),url(footer-products/atlas.avif);background-size:100% 100%,1000% 1000%;background-position:center,calc(var(--cx)*100%/9) calc(var(--cy)*100%/9);border:1px solid rgba(91,104,96,.42);border-top-color:rgba(255,255,255,.92);border-left-color:rgba(255,255,255,.72);border-radius:5px;box-shadow:inset 0 1px rgba(255,255,255,.88),inset 0 -2px rgba(73,85,77,.1),0 7px 11px -7px rgba(25,35,28,.46),0 2px 3px rgba(25,35,28,.2);transform:translateY(-3px) rotateX(3deg);transform-origin:center bottom;transform-style:preserve-3d;transition:transform .22s var(--ease-out),box-shadow .22s var(--ease-out)}
 @media(hover:hover) and (pointer:fine){.footer-product:hover{z-index:2;transform:translateY(-10px) rotateX(0) scale(1.14);box-shadow:inset 0 1px rgba(255,255,255,.95),0 16px 24px -10px rgba(30,42,33,.38),0 4px 7px rgba(25,35,28,.16)}}
 .footer-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:16px;border-top:1px solid #e2e6e2;color:#62625f;font-size:12px}.footer-bottom a{color:#59655d}
 .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
 @media(max-width:560px){.header-inner{height:auto;min-height:104px;grid-template-rows:64px 40px}.desktop-nav{display:flex;grid-column:1/-1;grid-row:2;justify-self:center;align-self:start;padding:2px}.desktop-nav a{padding:5px 13px;font-size:13px}.nav-cta{grid-column:2;grid-row:1}.wordmark{grid-column:1;grid-row:1}.future-demo-anchor{scroll-margin-top:110px}}
-@media(max-width:760px){.site-footer{padding:34px 0 18px}.footer-links{grid-template-columns:repeat(2,1fr);gap:24px 12px;margin:0 0 28px}.footer-links>div{gap:8px}.footer-links h2{font-size:12px}.footer-links a,.footer-links p{font-size:12px}.footer-art{--cell:calc((100vw - 32px)/25);margin:10px auto 25px;filter:drop-shadow(0 0 .7px rgba(40,48,43,.54)) drop-shadow(0 10px 10px rgba(31,38,33,.09))}.footer-product{border-radius:3px;box-shadow:inset 0 1px rgba(255,255,255,.84),inset 0 -1px rgba(73,85,77,.11),0 5px 8px -6px rgba(25,35,28,.52),0 1px 2px rgba(25,35,28,.21);transform:translateY(-2px) rotateX(3deg)}.footer-bottom{padding-top:14px;justify-content:center;text-align:center;gap:10px 24px}.footer-bottom span{flex-basis:100%}}
+@media(max-width:760px){.site-footer{padding:34px 0 18px}.footer-links{grid-template-columns:repeat(2,1fr);gap:24px 12px;margin:0 0 28px}.footer-links>div{gap:8px}.footer-links h2{font-size:12px}.footer-links a,.footer-links p{font-size:12px}.footer-art{--cell:calc((100vw - 32px)/25);margin:10px auto 25px;filter:drop-shadow(0 0 .7px rgba(40,48,43,.54)) drop-shadow(0 10px 10px rgba(31,38,33,.09))}.footer-art:after{inset:-8px 0 -7px;border-radius:14px}.footer-product{border-radius:3px;box-shadow:inset 0 1px rgba(255,255,255,.84),inset 0 -1px rgba(73,85,77,.11),0 5px 8px -6px rgba(25,35,28,.52),0 1px 2px rgba(25,35,28,.21);transform:translateY(-2px) rotateX(3deg)}.footer-bottom{padding-top:14px;justify-content:center;text-align:center;gap:10px 24px}.footer-bottom span{flex-basis:100%}}
 @media(prefers-reduced-motion:reduce){.footer-product,.footer-links a{transition:none}.footer-product:hover{transform:none!important}}
 </style>
+
+    <style id="commerce-composition-css">
+      .commerce-frame{height:760px}
+      @media(max-width:900px){.commerce-frame{height:1800px}}
+      @media(max-width:560px){.commerce-frame{height:1690px}}
+    </style>
 
     <style id="closing-chat-css">
       .closing-section{padding:110px 24px 86px;background:var(--paper);color:#191b19}
@@ -275,7 +282,7 @@ body{font-family:Schibsted Critical,Arial,sans-serif}
         </div>
       </section>
       <section class="commerce-section" id="flair" aria-label="Flair commerce layer: discover, transact, integrate and earn">
-        <iframe class="commerce-frame" title="How Flair commerce works" data-src="4-commerce-motion.html?embed&amp;v=hierarchy-20260928" loading="lazy" scrolling="no"></iframe>
+        <iframe class="commerce-frame" title="How Flair commerce works" data-src="4-commerce-motion.html?embed&amp;v=composition-20260928" loading="lazy" scrolling="no"></iframe>
       </section>
       <script>
       (()=>{const frame=document.querySelector('.commerce-frame');if(!frame)return;
