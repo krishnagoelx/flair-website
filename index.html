@@ -255,7 +255,20 @@ body{font-family:Schibsted Critical,Arial,sans-serif}
   .feature-stage{display:none}
 }
 @media (max-width:560px){.feature-trigger small{font-size:14px;line-height:1.5}.feature-list .feature-view{min-height:360px;margin-bottom:36px}}
-</style>
+/* Demo video embed */
+      .demo-section{padding:110px 24px;background:var(--paper);scroll-margin-top:72px}
+      .demo-inner{width:min(100%,960px);margin-inline:auto;display:flex;flex-direction:column;align-items:center;gap:36px}
+      .demo-title{display:block;min-height:0;max-width:700px;margin:0;text-align:center;font-size:clamp(38px,3.5vw,52px);font-weight:500;line-height:1.04;letter-spacing:-.052em;color:var(--ink);text-wrap:balance}
+      .demo-frame{position:relative;width:100%;aspect-ratio:16/9;border-radius:20px;overflow:hidden;background:#e9e9e6;border:1px solid var(--line);box-shadow:var(--glass-shadow)}
+      .demo-play{position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;background:none;cursor:pointer}
+      .demo-poster-img{display:block;width:100%;height:100%;object-fit:cover}
+      .demo-play-badge{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;width:76px;height:76px;border-radius:50%;color:#fff;background:rgba(22,22,22,.78);backdrop-filter:blur(6px);transition:transform .35s var(--ease-out),background .35s var(--ease-out)}
+      .demo-play:hover .demo-play-badge{transform:translate(-50%,-50%) scale(1.06);background:rgba(22,22,22,.88)}
+      .demo-play:focus-visible .demo-play-badge{outline:2px solid var(--ink);outline-offset:3px}
+      .demo-play-badge svg{margin-left:3px}
+      .demo-video{display:block;width:100%;height:100%;object-fit:cover;background:#000}
+      @media(max-width:760px){.demo-section{padding:72px 20px;scroll-margin-top:110px}.demo-frame{border-radius:14px}.demo-play-badge{width:60px;height:60px}}
+      </style>
 </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -354,7 +367,27 @@ body{font-family:Schibsted Critical,Arial,sans-serif}
           </div>
         </div>
       </section>
-      <div id="demo" class="future-demo-anchor"></div>
+      <section class="demo-section" id="demo" aria-labelledby="demo-title">
+        <div class="demo-inner">
+          <h2 class="demo-title" id="demo-title">See flair in action</h2>
+          <div class="demo-frame">
+            <button type="button" class="demo-play" id="demo-play" aria-label="Play the flair demo video">
+              <picture>
+                <source type="image/avif" srcset="demo/demo-poster-800.avif 800w, demo/demo-poster-1600.avif 1600w" sizes="(max-width: 1008px) calc(100vw - 48px), 960px" />
+                <img class="demo-poster-img" src="demo/demo-poster-800.webp" srcset="demo/demo-poster-800.webp 800w, demo/demo-poster-1600.webp 1600w" sizes="(max-width: 1008px) calc(100vw - 48px), 960px" width="1600" height="900" alt="Still from the flair demo: an AI health coach suggests a whey protein product" loading="lazy" decoding="async" />
+              </picture>
+              <span class="demo-play-badge" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+            </button>
+          </div>
+        </div>
+      </section>
+      <script>
+      (()=>{const btn=document.getElementById('demo-play');if(!btn)return;
+        btn.addEventListener('click',()=>{const frame=btn.closest('.demo-frame');const v=document.createElement('video');
+          v.className='demo-video';v.controls=true;v.playsInline=true;v.setAttribute('playsinline','');v.preload='none';
+          v.src=matchMedia('(max-width: 768px)').matches?'demo/flair-demo-720.mp4':'demo/flair-demo-1080.mp4';
+          frame.replaceChild(v,btn);const p=v.play();if(p&&p.catch)p.catch(()=>{});});})();
+      </script>
       <section class="closing-section" id="developers" aria-labelledby="closing-title"><div class="closing-inner"><h2 id="closing-title"><span class="closing-title-line">Give your <span class="closing-role" id="closing-role">AI</span> a <span class="closing-flair">flair</span></span><span class="closing-title-line">for shopping.</span></h2><div class="closing-logos" aria-label="Developer tools"><span class="closing-logo"><img src="logos/codex-color.svg" alt="" loading="lazy">Codex</span><span class="closing-logo"><img src="logos/claude-color.svg" alt="" loading="lazy">Claude</span><span class="closing-logo emergent"><img src="logos/emergent.svg" alt="Emergent" loading="lazy"><span>Emergent</span></span><span class="closing-logo"><img src="logos/replit-color.svg" alt="" loading="lazy">Replit</span><span class="closing-logo"><img src="logos/lovable-color.svg" alt="" loading="lazy">Lovable</span><span class="closing-logo"><img src="logos/bolt.svg" alt="" loading="lazy">Bolt</span></div><div class="closing-chat" aria-label="An animated developer prompt preview"><div class="closing-chat-body"><span class="closing-tag">@Flair</span><span class="closing-typed" id="closing-typed"></span><span class="closing-caret" aria-hidden="true"></span></div><div class="closing-chat-actions"><button class="closing-send" type="button" id="closing-next" aria-label="Show next example prompt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5"/></svg></button></div></div><a class="button button-dark closing-button" href="https://calendly.com/addflair/30min" target="_blank" rel="noopener noreferrer">Book a call</a></div></section>
     </main>
 
