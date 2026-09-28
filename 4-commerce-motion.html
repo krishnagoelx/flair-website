@@ -291,19 +291,20 @@ html.embedded .modern-flow{background:#fff!important;border-color:#e7e1ff!import
 @font-face{font-family:'Schibsted Grotesk';src:url('fonts/schibsted-latin.woff2') format('woff2');font-style:normal;font-weight:400 600;font-display:swap}
 html.embedded body,html.embedded .micro-intro,html.embedded .micro-intro p,html.embedded .panel,html.embedded .panel .num,html.embedded .panel .num span,html.embedded .panel h2,html.embedded .panel p{font-family:'Schibsted Grotesk',Arial,sans-serif!important}
 html.embedded .micro-intro:before{font-family:'Schibsted Grotesk',Arial,sans-serif!important;font-size:12px;font-weight:500;letter-spacing:-.014em;line-height:1.25}
-html.embedded .micro-intro{margin-bottom:52px}
+html.embedded .micro-intro{margin-bottom:56px}
 html.embedded .micro-intro:before{margin-bottom:13px}
-html.embedded .micro-intro p{max-width:none;margin:0;color:#171a18}
+html.embedded .micro-intro p{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(260px,.7fr);align-items:end;gap:clamp(44px,6vw,88px);max-width:none;margin:0;color:#171a18;white-space:normal}
 html.embedded .micro-intro p span{display:block}
-html.embedded .micro-primary{font-size:clamp(38px,3.15vw,48px);font-weight:550;line-height:1.04;letter-spacing:-.05em}
-html.embedded .micro-secondary{max-width:28ch;margin-top:10px;color:#59605b;font-size:clamp(27px,2.15vw,34px);font-weight:400;line-height:1.12;letter-spacing:-.038em}
+html.embedded .micro-primary{max-width:21ch;font-size:clamp(36px,2.8vw,43px);font-weight:520;line-height:1.06;letter-spacing:-.047em}
+html.embedded .micro-secondary{max-width:18ch;padding-bottom:4px;color:#646b66;font-size:clamp(22px,1.75vw,27px);font-weight:400;line-height:1.18;letter-spacing:-.03em}
+html.embedded .panel:before{width:27%;height:29%;opacity:.065}
 html.embedded .panel .num,html.embedded .panel .num span{font-size:12px;font-weight:500;line-height:1.25;letter-spacing:-.014em}
 html.embedded .panel h2{font-size:28px;font-weight:500;line-height:1.08;letter-spacing:-.052em}
 html.embedded .panel p,html.embedded .panel:nth-child(2) p,html.embedded .panel:nth-child(3) p{font-size:15px!important;font-weight:400;line-height:1.47!important;letter-spacing:-.014em;opacity:.9}
 @media(min-width:901px){html.embedded .panel{min-height:500px}html.embedded .panel h2{height:61px;margin:17px 0 17px}html.embedded .panel p,html.embedded .panel:nth-child(2) p,html.embedded .panel:nth-child(3) p{height:88px;min-height:88px!important}html.embedded .panel .visual{margin-top:auto!important}}
 @media(max-width:900px){html.embedded .panel{min-height:0;height:480px;box-sizing:border-box}html.embedded .panel h2{font-size:26px;height:56px;margin:17px 0 18px}html.embedded .panel p,html.embedded .panel:nth-child(2) p,html.embedded .panel:nth-child(3) p{height:96px;min-height:96px!important;font-size:15px!important;line-height:1.47!important;letter-spacing:-.014em}html.embedded .panel .visual,html.embedded .panel:nth-child(2) .visual{margin-top:auto!important;height:234px;flex:none}}
 
-@media(max-width:900px){html.embedded .micro-intro{margin-bottom:36px}html.embedded .micro-primary{max-width:17ch;font-size:clamp(31px,6vw,39px);line-height:1.06}html.embedded .micro-secondary{max-width:22ch;margin-top:9px;font-size:clamp(23px,4.6vw,29px);line-height:1.14}}
+@media(max-width:900px){html.embedded .micro-intro{margin-bottom:36px}html.embedded .micro-intro p{display:block}html.embedded .micro-primary{max-width:17ch;font-size:clamp(31px,6vw,39px);line-height:1.06}html.embedded .micro-secondary{max-width:22ch;margin-top:9px;padding-bottom:0;font-size:clamp(23px,4.6vw,29px);line-height:1.14}}
 @media(max-width:560px){html.embedded .page{padding-left:12px;padding-right:12px}html.embedded .micro-intro{margin-bottom:30px}html.embedded .micro-intro:before{margin-bottom:11px}html.embedded .micro-primary{max-width:16ch;font-size:29px;line-height:1.07;letter-spacing:-.045em}html.embedded .micro-secondary{max-width:19ch;margin-top:8px;font-size:21px;line-height:1.18;letter-spacing:-.03em}html.embedded .panel{padding-left:12px;padding-right:12px}}
 /* Three use cases, a single stable frame. Fade only while the scene changes. */
 .modern-flow .flow-host{bottom:27px;transition:opacity .45s ease}.modern-flow.flow-switch .flow-host{opacity:0}.modern-flow .flow-scene-label{position:absolute;left:13px;bottom:7px;color:#5f6e62;font:600 8px 'Schibsted Grotesk',Arial,sans-serif;letter-spacing:.08em}.modern-flow .flow-product small{display:block}.modern-flow .flow-stage{padding:8px 11px}.modern-flow .flow-product{margin-top:6px}.modern-flow .flow-action,.modern-flow .flow-receipt{bottom:6px}
