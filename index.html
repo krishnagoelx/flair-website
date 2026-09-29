@@ -1448,6 +1448,29 @@
 #feature-right-earn .f5-chip.c4 code{white-space:normal;overflow-wrap:anywhere;line-height:1.04;font-size:6.2px}
 }
 
+/* Preserve the wide scene while capping fixed artwork to the room it actually has. */
+@media(min-width:901px){
+#feature-right-products .f1drop .prompt{left:50%!important;width:min(540px,calc(100% - 24px))!important}
+#feature-right-products .f1drop .f1code{width:min(540px,calc(100% - 24px))!important}
+}
+/* The two-column wall can be narrower than the viewport, especially in the split layout. */
+@media(min-width:561px){
+#feature-right-earn .f5-wall{container-type:inline-size}
+#feature-right-earn .f5-slot{width:min(254px,calc((100% - 42px)/2))}
+#feature-right-earn .f5-slot.s2,#feature-right-earn .f5-slot.s4,#feature-right-earn .f5-slot.s6{left:min(280px,calc(50% + 5px))}
+#feature-right-earn .f5-chip{width:min(238px,calc((100% - 58px)/2))}
+#feature-right-earn .f5-chip.c2,#feature-right-earn .f5-chip.c4,#feature-right-earn .f5-chip.c6{left:min(288px,calc(50% + 13px))}
+@container(max-width:550px){
+.f5-chip code{overflow-wrap:anywhere}
+#feature-right-earn .f5-chip.c4 code{white-space:normal;overflow-wrap:anywhere;letter-spacing:0;line-height:1.1;font-size:clamp(6px,2.1cqw,9px)}
+}
+}
+
+/* On mobile the code starts directly under the pinned prompt, as on desktop. */
+@media(max-width:900px){
+#feature-right-products .f1drop .f1code{top:194px!important;width:min(320px,calc(100% - 24px))!important}
+}
+
 /* The prompt remains in the same place while only the code inside its panel scrolls. */
 #feature-right-products .f1drop .prompt{animation:f1PinnedPrompt 24s ease-in-out infinite!important}
 #feature-right-products .f1drop .f1code{animation:f1PinnedCode 24s ease-in-out infinite!important}
