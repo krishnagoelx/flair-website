@@ -1921,7 +1921,9 @@ scene._moRestart=now;
 scene.classList.add('mo-reset');
 void scene.offsetWidth;
 scene.classList.remove('mo-reset');
+anims(scene).forEach(a=>{try{a.currentTime=0}catch(e){}a.play()});
 };
+const anims=s=>s.getAnimations?s.getAnimations({subtree:true}):[];
 const io=new IntersectionObserver(entries=>{
 entries.forEach(en=>{
 const s=en.target;
@@ -1929,7 +1931,7 @@ if(en.isIntersecting){
 s.classList.remove('mo-off');
 restart(s);
 s._moSeen=true;
-}else s.classList.add('mo-off');
+}else{s.classList.add('mo-off');anims(s).forEach(a=>{try{a.pause()}catch(e){}})}
 });
 },{rootMargin:'0px',threshold:0});
 scenes.forEach(s=>io.observe(s));
