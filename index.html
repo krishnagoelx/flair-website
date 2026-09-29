@@ -81,6 +81,33 @@
 @keyframes f1drop-api2{0%,33%{opacity:0;transform:translate(-12px,8px) scale(.8);width:81px;height:26px;border-radius:8px}41%,47%{opacity:1;transform:none;width:81px;height:26px;border-radius:8px}57%{opacity:1;transform:translate(84px,-6px);width:81px;height:26px;border-radius:8px}63%{opacity:1;transform:translate(84px,-6px);width:107px;height:145px;border-radius:7px}69%,100%{opacity:0;transform:translate(84px,-6px);width:107px;height:145px;border-radius:7px}}
 @keyframes f1drop-api3{0%,35%{opacity:0;transform:translate(-12px,8px) scale(.8);width:81px;height:26px;border-radius:8px}45%,55%{opacity:1;transform:none;width:81px;height:26px;border-radius:8px}67%{opacity:1;transform:translate(84px,117px);width:81px;height:26px;border-radius:8px}74%{opacity:1;transform:translate(84px,117px);width:219px;height:33px;border-radius:8px}79%,100%{opacity:0;transform:translate(84px,117px);width:219px;height:33px;border-radius:8px}}}
 
+/* F1 alignment correction: the source prompt is centered and docks above, never over the app. */
+#feature-right-products .f1drop .logos{top:21px;gap:9px;z-index:14}#feature-right-products .f1drop .logos span{padding:5px 8px}#feature-right-products .f1drop .logos .brand i{font-size:14px}
+#feature-right-products .f1drop .prompt{left:124px;z-index:15;animation:f1drop-f1PromptDock 6.8s cubic-bezier(.22,.8,.2,1) infinite}
+@keyframes f1drop-f1PromptDock{0%,17%{opacity:1;transform:none}20%{transform:translate(62px,-103px) scale(.72)}23%,94%{opacity:1;transform:translate(62px,-103px) scale(.72)}97%{opacity:1;transform:translate(0,-50px) scale(.86)}100%{opacity:1;transform:none}}
+#feature-right-products .f1drop .app{top:145px;animation:f1drop-f1AppEnter 6.8s cubic-bezier(.2,.8,.2,1) infinite}
+@keyframes f1drop-f1AppEnter{0%,21%{opacity:0;transform:translate(0,22px) scale(.96)}27%{opacity:1;transform:translateY(-4px) scale(1.01)}31%,94%{opacity:1;transform:none}95%,100%{opacity:0;transform:translate(0,22px) scale(.96)}}
+#feature-right-products .f1drop .checkout{top:339px}#feature-right-products .f1drop .api{top:162px}
+/* A short, intentional CTA connector replaces the old sweeping line. */
+#feature-right-products .f1drop .rail,#feature-right-products .f1drop .signal,#feature-right-products .f1drop .port{display:none!important}
+#feature-right-products .f1drop .prompt .send{position:relative;animation:f1drop-f1Send 6.8s cubic-bezier(.25,.8,.2,1) infinite}
+@keyframes f1drop-f1Send{0%,17%{transform:scale(1)}19%{transform:scale(.78)}21%{transform:scale(1.08)}23%,100%{transform:scale(1)}}
+@media (max-width:900px){#feature-right-products .f1drop .logos{top:11px;gap:4px}#feature-right-products .f1drop .logos span{padding:4px 5px;font-size:8px;gap:3px}#feature-right-products .f1drop .logos img{width:12px;height:12px}#feature-right-products .f1drop .prompt{left:27px;top:119px}#feature-right-products .f1drop .app{top:89px}#feature-right-products .f1drop .api{top:126px}#feature-right-products .f1drop .checkout{top:259px}
+@keyframes f1drop-f1PromptDock{0%,17%{opacity:1;transform:none}20%{transform:translate(40px,-75px) scale(.73)}23%,94%{opacity:1;transform:translate(40px,-75px) scale(.73)}97%{opacity:1;transform:translate(18px,-38px) scale(.87)}100%{opacity:1;transform:none}}
+}
+
+/* Code pours beneath the sent CTA, then resolves into the app. */
+#feature-right-products .f1drop .codeburst{animation:f1drop-f1CodeReveal 6.8s cubic-bezier(.16,.8,.2,1) infinite;background:#1d2923ee;backdrop-filter:blur(5px)}
+@keyframes f1drop-f1CodeReveal{0%,19%{opacity:0;transform:translateY(-18px) scaleY(.42);transform-origin:top center}23%{opacity:1;transform:translateY(0) scaleY(1)}36%{opacity:1;transform:none}41%,100%{opacity:0;transform:translateY(9px) scale(.98);visibility:hidden}}
+#feature-right-products .f1drop .codeline{overflow:hidden}#feature-right-products .f1drop .codeline code{display:block;overflow:hidden;white-space:nowrap;animation:f1drop-f1CodeType 6.8s steps(33,end) infinite;width:0;max-width:24ch}
+#feature-right-products .f1drop .codeline.l2 code{animation-name:f1drop-f1CodeType2}#feature-right-products .f1drop .codeline.l3 code{animation-name:f1drop-f1CodeType3}
+@keyframes f1drop-f1CodeType{0%,22%{width:0}27%,100%{width:24ch}}
+@keyframes f1drop-f1CodeType2{0%,26%{width:0}31%,100%{width:24ch}}
+@keyframes f1drop-f1CodeType3{0%,30%{width:0}35%,100%{width:24ch}}
+#feature-right-products .f1drop .codecursor{animation:f1drop-f1Cursor 6.8s steps(1,end) infinite}
+@keyframes f1drop-f1Cursor{0%,20%,40%,100%{opacity:0}21%,39%{opacity:1}}
+@media (max-width:900px){#feature-right-products .f1drop .codeline code{max-width:22ch}}
+
 #feature-right-products .f1drop{position:absolute;inset:0;overflow:hidden;isolation:isolate;font-family:Arial,Helvetica,sans-serif;color:#28392e}
 
 </style>
