@@ -76,10 +76,10 @@
 .mo-progress{position:absolute;left:0;right:0;bottom:0;height:3px;z-index:8;pointer-events:none;background:rgba(36,133,80,.12)}
 .mo-progress>i{display:block;height:100%;background:#248550;opacity:.5;transform:scaleX(0);transform-origin:left center;animation:moProgress var(--mo-loop,10s) linear infinite}
 #feature-right-products .mo-progress>i{--mo-loop:13s}
-#feature-right-earn .mo-progress>i{--mo-loop:5s}
-#feature-right-native .mo-progress>i{--mo-loop:5s}
+#feature-right-earn .mo-progress>i{--mo-loop:8s}
+#feature-right-native .mo-progress>i{--mo-loop:10s}
 @keyframes moProgress{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-.mo-scene.mo-off,.mo-scene.mo-off *{animation-play-state:paused!important}
+.mo-scene.mo-off,.mo-scene.mo-off *{animation-play-state:paused!important}.mo-scene.mo-reset,.mo-scene.mo-reset *{animation:none!important}
 @media(prefers-reduced-motion:reduce){.mo-progress{display:none}}
 
 
@@ -530,6 +530,292 @@
 #feature-right-products .f1drop .command{display:inline-block;vertical-align:baseline;width:auto;font-family:inherit;font-size:inherit;line-height:inherit;margin-right:3px;padding:0 2px}
 #feature-right-products .f1drop .command-text{display:inline-block;vertical-align:baseline}
 #feature-right-products .f1drop .prompt-words{display:inline;line-height:inherit;max-height:none;overflow:visible}
+
+/* F4 v2 - agent shops as the user. 10s loop, transform/opacity only. Ref stage 822x520. */
+#feature-right-native .f4id{position:absolute;inset:0;overflow:hidden;background:#f6f8f5;font-family:Arial,Helvetica,sans-serif;color:#26362c;isolation:isolate}
+#feature-right-native .f4id:before{content:'';position:absolute;inset:0;background-image:linear-gradient(#8aa38b12 1px,transparent 1px),linear-gradient(90deg,#8aa38b12 1px,transparent 1px);background-size:39px 39px}
+#feature-right-native .f4id *{box-sizing:border-box}
+#feature-right-native .f4-inner{position:absolute;inset:0;animation:f4Scene 10s linear infinite}
+
+/* app checkout card */
+#feature-right-native .f4-app{position:absolute;left:4%;top:7%;width:48%;height:79%;background:#fff;border:1px solid #dce4dc;border-radius:15px;box-shadow:0 15px 28px #304b3718;padding:14px 16px}
+#feature-right-native .f4-app-head{height:30px;display:flex;align-items:center}
+#feature-right-native .f4-app-head>span{font:700 10px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.09em;color:#667b69}
+#feature-right-native .f4-avslot{margin-left:auto;position:relative;width:30px;height:30px}
+#feature-right-native .f4-av-guest{position:absolute;inset:0;display:grid;place-items:center;border:1.5px dashed #c3cfc6;border-radius:50%;color:#a7b3a9;font:700 12px Arial;animation:f4GuestAv 10s ease infinite}
+#feature-right-native .f4-av-in{position:absolute;inset:0;display:grid;place-items:center;background:#26332b;border-radius:50%;color:#fff;animation:f4MiniAv 10s cubic-bezier(.2,.9,.3,1.15) infinite}
+#feature-right-native .f4-av-in svg{width:16px;height:16px}
+#feature-right-native .f4-field{position:absolute;left:16px;right:16px;height:44px;display:grid;gap:4px}
+#feature-right-native .f4-field small{font:700 8px ui-monospace,monospace;letter-spacing:.08em;color:#8b9890}
+#feature-right-native .f4-field>div{height:28px;border-radius:7px;display:flex;align-items:center;gap:7px;padding:0 9px;font:600 10px Arial}
+#feature-right-native .f4-field svg{width:13px;height:13px;color:#5c715e}
+#feature-right-native .f4-ship{top:48px}
+#feature-right-native .f4-pay{top:100px}
+#feature-right-native .f4-guest{border:1.5px dashed #d3ddd5;color:#a7b3a9;animation:f4GuestRow 10s ease infinite}
+#feature-right-native .f4-signed{position:absolute;left:0;right:0;bottom:0;border:1px solid #dde6de;background:#fafcf9;color:#37473d;animation:f4SignedRow 10s cubic-bezier(.2,.75,.2,1) infinite}
+#feature-right-native .f4-div{position:absolute;left:16px;right:16px;top:152px;height:1px;background:#e8ede8}
+#feature-right-native .f4-product{position:absolute;left:16px;right:16px;top:164px;height:66px;display:flex;gap:11px;align-items:center}
+#feature-right-native .f4-product img{width:60px;height:60px;object-fit:contain;border-radius:9px;background:#f4f5f2;border:1px solid #ecefe9}
+#feature-right-native .f4-pwords{display:grid;gap:3px}
+#feature-right-native .f4-pwords small{font:700 8px ui-monospace,monospace;letter-spacing:.12em;color:#667b69}
+#feature-right-native .f4-pwords strong{font:700 13px Arial}
+#feature-right-native .f4-pwords span{font:500 9px Arial;color:#75827a}
+#feature-right-native .f4-priceblock{position:absolute;left:16px;right:16px;top:238px;height:38px}
+#feature-right-native .f4-priceblock>small{font:700 8px ui-monospace,monospace;letter-spacing:.08em;color:#8b9890}
+#feature-right-native .f4-prices{position:relative;height:26px;margin-top:3px}
+#feature-right-native .f4-p1{position:absolute;left:0;bottom:4px;font:600 13px Arial;color:#37473d;animation:f4P1 10s ease infinite}
+#feature-right-native .f4-p1:after{content:'';position:absolute;left:-2px;right:-2px;top:52%;height:1.5px;background:#8b9890;transform:scaleX(0);transform-origin:left;animation:f4Strike1 10s ease infinite}
+#feature-right-native .f4-p2{position:absolute;left:56px;bottom:2px;font:700 20px Arial;color:#26362c;animation:f4P2 10s cubic-bezier(.2,.9,.3,1.15) infinite}
+#feature-right-native .f4-p2:after{content:'';position:absolute;left:-2px;right:-2px;top:52%;height:1.5px;background:#8b9890;transform:scaleX(0);transform-origin:left;animation:f4Strike2 10s ease infinite}
+#feature-right-native .f4-p3{position:absolute;left:56px;bottom:0;font:700 24px Arial;color:#1f7a45;animation:f4P3 10s cubic-bezier(.2,.9,.3,1.15) infinite}
+#feature-right-native .f4-tag1,#feature-right-native .f4-tag2{position:absolute;left:118px;bottom:3px;font:700 9px ui-monospace,monospace;font-style:normal;color:#1f7a45;background:#e6f4ea;border-radius:4px;padding:3px 6px}
+#feature-right-native .f4-tag1{animation:f4Tag1 10s ease infinite}
+#feature-right-native .f4-tag2{animation:f4Tag2 10s ease infinite}
+#feature-right-native .f4-dock{position:absolute;left:16px;right:16px;top:286px;height:32px;display:flex;gap:8px}
+#feature-right-native .f4-dockslot{width:124px;border:1.5px dashed #d3ddd5;border-radius:8px}
+#feature-right-native .f4-buy{position:absolute;left:16px;right:16px;bottom:14px;height:44px;border-radius:9px;display:grid;place-items:center;background:#d5ddd6;color:#8b9890;font:700 13px Arial;animation:f4BuyBtn 10s ease infinite}
+#feature-right-native .f4-buy span{grid-area:1/1}
+#feature-right-native .f4-buy-label{animation:f4BuyLabel 10s ease infinite}
+#feature-right-native .f4-buy-done{color:#fff;animation:f4BuyDone 10s ease infinite}
+
+/* benefit chips: docked dim, activated by the agent cursor */
+#feature-right-native .f4-fly{position:absolute;top:322px;width:124px;height:32px;border-radius:8px;display:grid;place-items:center;font:700 9px ui-monospace,monospace;z-index:4;opacity:0}
+#feature-right-native .f4-coupon{left:49px;animation:f4Coupon 10s ease infinite}
+#feature-right-native .f4-points{left:181px;animation:f4Points 10s ease infinite}
+
+/* agent tile (light) */
+#feature-right-native .f4-orb{position:absolute;left:560px;top:48px;width:96px;height:96px}
+#feature-right-native .f4-orbbody{position:absolute;inset:0;border-radius:22px;background:#eef1ee;border:1px solid rgba(23,32,24,.1);display:grid;place-items:center;box-shadow:0 10px 24px #2b513118;animation:f4Orb 10s ease infinite}
+#feature-right-native .f4-orbbody i{font-style:normal;font-size:26px;color:#9aa79e;animation:f4OrbGlyph 10s ease infinite}
+#feature-right-native .f4-ring{position:absolute;inset:-6px;border:2px solid #8fae95;border-radius:26px;opacity:0;animation:f4Ring 10s ease-out infinite}
+#feature-right-native .f4-avatar{position:absolute;left:590px;top:78px;width:36px;height:36px;border-radius:50%;background:#fff;border:2px solid #fff;box-shadow:0 6px 14px #2b51312e;display:grid;place-items:center;color:#26332b;z-index:3;animation:f4Avatar 10s cubic-bezier(.3,.7,.3,1) infinite}
+#feature-right-native .f4-avatar svg{width:20px;height:20px}
+
+/* labeled agent cursor operating the checkout */
+#feature-right-native .f4-cursor{position:absolute;left:602px;top:93px;width:22px;z-index:6;opacity:0;animation:f4Cursor 10s linear infinite}
+#feature-right-native .f4-cursor svg{width:22px;height:22px;filter:drop-shadow(0 3px 5px #2b513140)}
+#feature-right-native .f4-cursor span{display:block;margin-top:4px;margin-left:-4px;width:44px;text-align:center;font:700 8px ui-monospace,monospace;color:#37473d;background:#fff;border:1px solid #dce4dc;border-radius:5px;padding:2px 0;box-shadow:0 4px 9px #304b3718}
+
+/* agent mail panel: rows arrive, get handled */
+#feature-right-native .f4-mail{position:absolute;left:560px;top:172px;width:236px;height:196px;background:#fff;border:1px solid #dce4dc;border-radius:13px;box-shadow:0 12px 24px #304b3715;overflow:hidden}
+#feature-right-native .f4-mail-head{height:30px;display:flex;align-items:center;gap:7px;padding:0 12px;border-bottom:1px solid #e6ede7}
+#feature-right-native .f4-mail-head span{font:700 8px ui-monospace,monospace;letter-spacing:.09em;color:#667b69}
+#feature-right-native .f4-mail-head i{margin-left:auto;width:6px;height:6px;border-radius:50%;background:#248550;animation:f4MailDot 10s ease infinite}
+#feature-right-native .f4-mrow{position:absolute;left:10px;right:10px;height:38px;display:flex;align-items:center;gap:8px;border:1px solid #e3eae4;background:#fafcf9;border-radius:8px;padding:0 10px;font:600 9.5px Arial;color:#37473d}
+#feature-right-native .f4-mrow em{font-style:normal;font-size:11px;color:#8b9890}
+#feature-right-native .f4-mrow b{margin-left:auto;font:700 8px ui-monospace,monospace;color:#a7b3a9}
+#feature-right-native .f4-mr1{top:42px;animation:f4MailR1 10s cubic-bezier(.2,.8,.25,1) infinite}
+#feature-right-native .f4-mr1 b{animation:f4MailC1 10s ease infinite}
+#feature-right-native .f4-mr2{top:88px;animation:f4MailR2 10s cubic-bezier(.2,.8,.25,1) infinite}
+#feature-right-native .f4-mr2 b{animation:f4MailC2 10s ease infinite}
+#feature-right-native .f4-mr3{top:134px;animation:f4MailR3 10s cubic-bezier(.2,.8,.25,1) infinite}
+#feature-right-native .f4-mr3 b{animation:f4MailC3 10s ease infinite}
+
+/* user inbox: stays at zero */
+#feature-right-native .f4-inbox{position:absolute;left:560px;top:384px;width:236px;height:64px;border:1.5px dashed #ccd6ce;border-radius:11px;display:flex;align-items:center;gap:10px;padding:0 14px}
+#feature-right-native .f4-inbox span{font:700 8px ui-monospace,monospace;letter-spacing:.09em;color:#a7b3a9}
+#feature-right-native .f4-inbox strong{margin-left:auto;font:700 22px Arial;color:#37473d}
+
+@keyframes f4Scene{0%{opacity:0}2%,96%{opacity:1}100%{opacity:0}}
+@keyframes f4Avatar{0%,3%{opacity:0;transform:translateY(-130px) scale(.9)}5%{opacity:1}10%{transform:translateY(5px) scale(1.04,.9)}12%{transform:translateY(-3px) scale(.97,1.05)}14%,93%{opacity:1;transform:none}97%,100%{opacity:0;transform:translateY(-46px) scale(.8)}}
+@keyframes f4Orb{0%,10%{background:#eef1ee;border-color:rgba(23,32,24,.1);transform:scale(.94)}12%{transform:scale(1.05)}14%,100%{background:#fff;border-color:rgba(23,32,24,.22)}15%,94%{transform:scale(1)}98%,100%{transform:scale(.94)}}
+@keyframes f4OrbGlyph{0%,12%{color:#9aa79e}16%,100%{color:#26332b}}
+@keyframes f4Ring{0%,10%{opacity:0;transform:scale(.55)}12%{opacity:.85}26%,100%{opacity:0;transform:scale(1.65)}}
+@keyframes f4GuestAv{0%,12%{opacity:1}16%,100%{opacity:0}}
+@keyframes f4MiniAv{0%,14%{opacity:0;transform:scale(.3)}18%{opacity:1;transform:scale(1.12)}20%,93%{opacity:1;transform:scale(1)}97%,100%{opacity:0}}
+@keyframes f4GuestRow{0%,12%{opacity:1;transform:none}17%,100%{opacity:0;transform:translateX(-14px)}}
+@keyframes f4SignedRow{0%,16%{opacity:0;transform:translateX(14px)}20%{opacity:1;transform:translateX(-2px)}22%,93%{opacity:1;transform:none}97%,100%{opacity:0}}
+@keyframes f4Coupon{0%,15%{opacity:0;background:#f2f5f2;color:#9aa79e;border:1px solid #e2e8e2}19%,26%{opacity:.45;background:#f2f5f2;color:#9aa79e;border:1px solid #e2e8e2;transform:none}29%{opacity:1;transform:translateY(-5px) scale(1.07)}30%,100%{background:#e6f4ea;color:#1f7a45;border:1px solid #bfe0c9}32%,93%{opacity:1;transform:none}97%,100%{opacity:0}}
+@keyframes f4Points{0%,15%{opacity:0;background:#f2f5f2;color:#9aa79e;border:1px solid #e2e8e2}19%,38%{opacity:.45;background:#f2f5f2;color:#9aa79e;border:1px solid #e2e8e2;transform:none}41%{opacity:1;transform:translateY(-5px) scale(1.07)}42%,100%{background:#e6f4ea;color:#1f7a45;border:1px solid #bfe0c9}44%,93%{opacity:1;transform:none}97%,100%{opacity:0}}
+@keyframes f4P1{0%,30%{opacity:1}35%,100%{opacity:.42}}
+@keyframes f4Strike1{0%,31%{transform:scaleX(0)}35%,100%{transform:scaleX(1)}}
+@keyframes f4P2{0%,33%{opacity:0;transform:translateY(10px) scale(.8)}37%{opacity:1;transform:translateY(-1px) scale(1.07)}40%,43%{opacity:1;transform:none}48%,100%{opacity:0;transform:translateY(-10px)}}
+@keyframes f4Strike2{0%,44%{transform:scaleX(0)}48%,100%{transform:scaleX(1)}}
+@keyframes f4P3{0%,46%{opacity:0;transform:translateY(12px) scale(.7)}50%{opacity:1;transform:translateY(-2px) scale(1.12)}54%,93%{opacity:1;transform:scale(1)}97%,100%{opacity:0}}
+@keyframes f4Tag1{0%,35%{opacity:0;transform:translateY(8px)}39%,44%{opacity:1;transform:none}48%,100%{opacity:0;transform:translateY(-8px)}}
+@keyframes f4Tag2{0%,48%{opacity:0;transform:translateY(8px)}52%,93%{opacity:1;transform:none}97%,100%{opacity:0}}
+@keyframes f4BuyBtn{0%,18%{background:#d5ddd6;color:#8b9890}20%,48%{background:#26332b;color:#fff}50%{transform:scale(.94)}52%{transform:scale(1.02)}54%,100%{transform:scale(1)}56%,93%{background:#248550;color:#fff}100%{background:#d5ddd6;color:#8b9890}}
+@keyframes f4BuyLabel{0%,54%{opacity:1;transform:none}58%,100%{opacity:0;transform:translateY(-10px)}}
+@keyframes f4BuyDone{0%,56%{opacity:0;transform:translateY(10px)}60%,93%{opacity:1;transform:none}97%,100%{opacity:0}}
+@keyframes f4Cursor{0%,20%{opacity:0;transform:translate(0,0)}22%{opacity:1;transform:translate(0,0)}26%{transform:translate(-497px,206px)}28%{transform:translate(-497px,206px) scale(.85)}29.5%{transform:translate(-497px,206px) scale(1)}35%{transform:translate(-365px,206px)}38.5%{transform:translate(-365px,206px) scale(.85)}40%{transform:translate(-365px,206px) scale(1)}46%{transform:translate(-378px,315px)}49%{transform:translate(-378px,315px) scale(.85)}50.5%{transform:translate(-378px,315px) scale(1)}57%{transform:translate(12px,84px)}95%{opacity:1;transform:translate(12px,84px)}98%,100%{opacity:0;transform:translate(12px,84px)}}
+@keyframes f4MailDot{0%,8%{background:#c3cfc6}12%,100%{background:#248550}}
+@keyframes f4MailR1{0%,62%{opacity:0;transform:translateY(-12px)}66%,93%{opacity:1;transform:none}97%,100%{opacity:0}}
+@keyframes f4MailC1{0%,66%{color:#a7b3a9}70%,100%{color:#1f7a45}}
+@keyframes f4MailR2{0%,72%{opacity:0;transform:translateY(-12px)}76%,93%{opacity:1;transform:none}97%,100%{opacity:0}}
+@keyframes f4MailC2{0%,76%{color:#a7b3a9}80%,100%{color:#1f7a45}}
+@keyframes f4MailR3{0%,82%{opacity:0;transform:translateY(-12px)}86%,93%{opacity:1;transform:none}97%,100%{opacity:0}}
+@keyframes f4MailC3{0%,86%{color:#a7b3a9}90%,100%{color:#1f7a45}}
+
+@media(max-width:560px){
+#feature-right-native .f4-app{left:3%;top:4%;width:60%;height:64%;border-radius:11px;padding:8px}
+#feature-right-native .f4-app-head{height:22px}
+#feature-right-native .f4-app-head>span{font-size:7px}
+#feature-right-native .f4-avslot{width:22px;height:22px}
+#feature-right-native .f4-av-guest{font-size:9px}
+#feature-right-native .f4-av-in svg{width:12px;height:12px}
+#feature-right-native .f4-field{left:8px;right:8px;height:28px;gap:2px}
+#feature-right-native .f4-field small{font-size:5.5px}
+#feature-right-native .f4-field>div{height:19px;font-size:7px;padding:0 5px;gap:4px;border-radius:5px}
+#feature-right-native .f4-field svg{width:9px;height:9px}
+#feature-right-native .f4-ship{top:30px}
+#feature-right-native .f4-pay{top:62px}
+#feature-right-native .f4-div{left:8px;right:8px;top:92px}
+#feature-right-native .f4-product{left:8px;right:8px;top:98px;height:40px;gap:6px}
+#feature-right-native .f4-product img{width:36px;height:36px;border-radius:6px}
+#feature-right-native .f4-pwords small{font-size:5.5px}
+#feature-right-native .f4-pwords strong{font-size:9px}
+#feature-right-native .f4-pwords span{font-size:6px}
+#feature-right-native .f4-priceblock{left:8px;right:8px;top:142px;height:22px}
+#feature-right-native .f4-priceblock>small{font-size:5.5px;line-height:1;display:block}
+#feature-right-native .f4-prices{height:15px;margin-top:2px}
+#feature-right-native .f4-p1{font-size:9px;bottom:2px}
+#feature-right-native .f4-p2{font-size:13px;left:36px}
+#feature-right-native .f4-p3{font-size:15px;left:36px}
+#feature-right-native .f4-tag1,#feature-right-native .f4-tag2{font-size:6px;left:76px;padding:2px 4px;bottom:1px}
+#feature-right-native .f4-dock{left:8px;right:8px;top:168px;height:20px;gap:5px}
+#feature-right-native .f4-dockslot{width:88px;border-radius:6px}
+#feature-right-native .f4-buy{left:8px;right:8px;bottom:6px;height:28px;font-size:9px;border-radius:6px}
+#feature-right-native .f4-fly{top:182px;width:88px;height:20px;font-size:6px;border-radius:6px}
+#feature-right-native .f4-coupon{left:19px}
+#feature-right-native .f4-points{left:112px}
+#feature-right-native .f4-orb{left:252px;top:20px;width:80px;height:80px}
+#feature-right-native .f4-orbbody{border-radius:17px}
+#feature-right-native .f4-orbbody i{font-size:21px}
+#feature-right-native .f4-ring{inset:-5px;border-radius:21px}
+#feature-right-native .f4-avatar{left:280px;top:48px;width:24px;height:24px}
+#feature-right-native .f4-avatar svg{width:13px;height:13px}
+#feature-right-native .f4-cursor{left:283px;top:52px;width:14px}
+#feature-right-native .f4-cursor svg{width:14px;height:14px}
+#feature-right-native .f4-cursor span{font-size:5.5px;width:30px;margin-left:-8px;padding:1px 0}
+#feature-right-native .f4-mail{left:230px;top:110px;width:122px;height:120px;border-radius:9px}
+#feature-right-native .f4-mail-head{height:18px;padding:0 7px;gap:4px}
+#feature-right-native .f4-mail-head span{font-size:5.5px}
+#feature-right-native .f4-mail-head i{width:4px;height:4px}
+#feature-right-native .f4-mrow{left:6px;right:6px;height:26px;gap:4px;padding:0 6px;font-size:6px;border-radius:5px}
+#feature-right-native .f4-mrow em{font-size:7px}
+#feature-right-native .f4-mrow b{font-size:5.5px}
+#feature-right-native .f4-mr1{top:24px}
+#feature-right-native .f4-mr2{top:56px}
+#feature-right-native .f4-mr3{top:88px}
+#feature-right-native .f4-inbox{left:230px;top:238px;width:122px;height:44px;border-radius:8px;padding:0 8px;gap:5px}
+#feature-right-native .f4-inbox span{font-size:5.5px}
+#feature-right-native .f4-inbox strong{font-size:14px}
+@keyframes f4Cursor{0%,20%{opacity:0;transform:translate(0,0)}22%{opacity:1;transform:translate(0,0)}26%{transform:translate(-229px,118px)}28%{transform:translate(-229px,118px) scale(.85)}29.5%{transform:translate(-229px,118px) scale(1)}35%{transform:translate(-136px,118px)}38.5%{transform:translate(-136px,118px) scale(.85)}40%{transform:translate(-136px,118px) scale(1)}46%{transform:translate(-174px,164px)}49%{transform:translate(-174px,164px) scale(.85)}50.5%{transform:translate(-174px,164px) scale(1)}57%{transform:translate(-6px,56px)}95%{opacity:1;transform:translate(-6px,56px)}98%,100%{opacity:0;transform:translate(-6px,56px)}}
+}
+
+@media(prefers-reduced-motion:reduce){
+#feature-right-native .f4id *{animation:none!important}
+#feature-right-native .f4-guest,#feature-right-native .f4-av-guest,#feature-right-native .f4-p1,#feature-right-native .f4-p2,#feature-right-native .f4-tag1,#feature-right-native .f4-buy-label,#feature-right-native .f4-cursor{display:none!important}
+#feature-right-native .f4-signed,#feature-right-native .f4-av-in,#feature-right-native .f4-p3,#feature-right-native .f4-tag2,#feature-right-native .f4-mrow,#feature-right-native .f4-avatar{opacity:1!important;transform:none!important}
+#feature-right-native .f4-coupon,#feature-right-native .f4-points{opacity:1!important;background:#e6f4ea!important;color:#1f7a45!important;border:1px solid #bfe0c9!important}
+#feature-right-native .f4-orbbody{background:#fff;border-color:rgba(23,32,24,.22)}
+#feature-right-native .f4-orbbody i{color:#26332b}
+#feature-right-native .f4-buy{background:#248550;color:#fff}
+#feature-right-native .f4-buy-done{opacity:1!important}
+#feature-right-native .f4-mrow b{color:#1f7a45!important}
+}
+/* F5 - APIs and webhooks cover everything. 5s loop, transform/opacity only. Ref stage 822x520. */
+#feature-right-earn .f5cov{position:absolute;inset:0;overflow:hidden;background:#f6f8f5;font-family:Arial,Helvetica,sans-serif;color:#26362c;isolation:isolate}
+#feature-right-earn .f5cov:before{content:'';position:absolute;inset:0;background-image:linear-gradient(#8aa38b12 1px,transparent 1px),linear-gradient(90deg,#8aa38b12 1px,transparent 1px);background-size:39px 39px}
+#feature-right-earn .f5cov *{box-sizing:border-box}
+#feature-right-earn .f5-inner{position:absolute;inset:0;animation:f5Scene 8s linear infinite}
+
+#feature-right-earn .f5-app{position:absolute;left:4%;top:30%;width:19%;height:40%;background:#fff;border:1px solid #dce4dc;border-radius:13px;box-shadow:0 12px 24px #304b3715;padding:11px;display:grid;grid-template-rows:18px 1fr}
+#feature-right-earn .f5-app-head{display:flex;align-items:center}
+#feature-right-earn .f5-app-head span{font:700 9px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.07em;color:#37473d}
+#feature-right-earn .f5-app-head i{margin-left:auto;font:500 8px ui-monospace,monospace;font-style:normal;color:#9aa8a0}
+#feature-right-earn .f5-needslot{position:relative}
+#feature-right-earn .f5-need{position:absolute;left:0;top:50%;margin-top:-17px;width:132px;height:34px;border:1.5px dashed #b9c9bd;border-radius:9px;background:#fbfdfb;display:grid;place-items:center;font:600 9px Arial;color:#5c715e}
+#feature-right-earn .f5-need.n1{animation:f5N1 8s cubic-bezier(.2,.9,.3,1.15) infinite}
+#feature-right-earn .f5-need.n2{animation:f5N2 8s cubic-bezier(.2,.9,.3,1.15) infinite}
+#feature-right-earn .f5-need.n3{animation:f5N3 8s cubic-bezier(.2,.9,.3,1.15) infinite}
+#feature-right-earn .f5-need.n4{animation:f5N4 8s cubic-bezier(.2,.9,.3,1.15) infinite}
+#feature-right-earn .f5-need.n5{animation:f5N5 8s cubic-bezier(.2,.9,.3,1.15) infinite}
+
+#feature-right-earn .f5-wire{position:absolute;left:23%;top:50%;width:6%;height:2px;background:#cfdcd2;border-radius:2px}
+
+#feature-right-earn .f5-wall{position:absolute;left:29%;top:8%;width:67%;height:82%;background:#fff;border:1px solid #d4e0d6;border-radius:15px;box-shadow:0 16px 32px #304b371c}
+#feature-right-earn .f5-wall-head{position:absolute;left:16px;right:16px;top:12px;height:26px;display:flex;align-items:center;gap:9px;border-bottom:1px solid #e6ede7;padding-bottom:9px}
+#feature-right-earn .f5-wall-head b{font:700 14px Arial;letter-spacing:-.02em}
+#feature-right-earn .f5-wall-head span{font:700 8px ui-monospace,monospace;letter-spacing:.09em;color:#8b9890}
+#feature-right-earn .f5-live{margin-left:auto;font:700 8px ui-monospace,monospace;font-style:normal;color:#9aa8a0;animation:f5Live 8s ease infinite}
+#feature-right-earn .f5-slot{position:absolute;width:254px;height:110px;border:1.5px dashed #dbe4dc;border-radius:11px}
+#feature-right-earn .f5-slot.s1{left:16px;top:58px}
+#feature-right-earn .f5-slot.s2{left:280px;top:58px}
+#feature-right-earn .f5-slot.s3{left:16px;top:178px}
+#feature-right-earn .f5-slot.s4{left:280px;top:178px}
+#feature-right-earn .f5-slot.s5{left:16px;top:298px}
+#feature-right-earn .f5-slot.s6{left:280px;top:298px}
+#feature-right-earn .f5-chip{position:absolute;width:238px;height:94px;background:#fff;border:1px solid #d8e2d9;border-radius:10px;box-shadow:0 10px 22px #304b3718;padding:12px 14px;display:grid;grid-template-rows:auto 1fr;gap:8px;z-index:2}
+#feature-right-earn .f5-chip b{justify-self:start;font:700 8px ui-monospace,monospace;padding:3px 5px;border-radius:4px}
+#feature-right-earn .f5-chip b.api{color:#258455;background:#e6f4ea}
+#feature-right-earn .f5-chip b.wh{color:#7c4a6e;background:#f5eaf2}
+#feature-right-earn .f5-chip code{font:700 11px ui-monospace,monospace;color:#37473d;align-self:start}
+#feature-right-earn .f5-chip.c1{left:24px;top:66px;animation:f5C1 8s linear infinite}
+#feature-right-earn .f5-chip.c2{left:288px;top:66px;animation:f5C2 8s linear infinite}
+#feature-right-earn .f5-chip.c3{left:24px;top:186px;animation:f5C3 8s linear infinite}
+#feature-right-earn .f5-chip.c4{left:288px;top:186px;animation:f5C4 8s linear infinite}
+#feature-right-earn .f5-chip.c5{left:24px;top:306px;animation:f5C5 8s linear infinite}
+#feature-right-earn .f5-chip.c6{left:288px;top:306px;display:grid;place-items:center;border:1.5px dashed #b9c9bd;background:#fbfdfb;box-shadow:none;animation:f5C6 8s cubic-bezier(.2,.9,.3,1.15) infinite}
+#feature-right-earn .f5-chip.c6 span{font:600 9px Arial;color:#8b9890}
+
+@keyframes f5Scene{0%{opacity:0}2%,96%{opacity:1}100%{opacity:0}}
+@keyframes f5Live{0%,4%{color:#9aa8a0;text-shadow:none}8%,100%{color:#248550}}
+@keyframes f5N1{0%,2%{opacity:0;transform:translateY(10px) scale(.85)}4.5%{opacity:1;transform:scale(1.04)}6%,13%{opacity:1;transform:none}15%,100%{opacity:0;transform:translateY(-10px) scale(.9)}}
+@keyframes f5N2{0%,13%{opacity:0;transform:translateY(10px) scale(.85)}15.5%{opacity:1;transform:scale(1.04)}17%,24%{opacity:1;transform:none}26%,100%{opacity:0;transform:translateY(-10px) scale(.9)}}
+@keyframes f5N3{0%,24%{opacity:0;transform:translateY(10px) scale(.85)}26.5%{opacity:1;transform:scale(1.04)}28%,35%{opacity:1;transform:none}37%,100%{opacity:0;transform:translateY(-10px) scale(.9)}}
+@keyframes f5N4{0%,35%{opacity:0;transform:translateY(10px) scale(.85)}37.5%{opacity:1;transform:scale(1.04)}39%,46%{opacity:1;transform:none}48%,100%{opacity:0;transform:translateY(-10px) scale(.9)}}
+@keyframes f5N5{0%,46%{opacity:0;transform:translateY(10px) scale(.85)}48.5%{opacity:1;transform:scale(1.04)}50%,57%{opacity:1;transform:none}59%,100%{opacity:0;transform:translateY(-10px) scale(.9)}}
+/* chip flights: FROM = app need slot center (scene coords 111,260) to chip slot center */
+@keyframes f5C1{0%,5%{opacity:0;transform:translate(-270px,105px) scale(.6)}6.43%{opacity:1;transform:translate(-177.8px,50.7px) scale(0.737)}7.86%{opacity:1;transform:translate(-109.4px,22.8px) scale(0.838)}9.40%{opacity:1;transform:translate(-58.3px,8.8px) scale(0.914)}10.94%{opacity:1;transform:translate(-26.3px,3.0px) scale(0.961)}12.48%{opacity:1;transform:translate(-8.8px,0.8px) scale(0.987)}13.80%{opacity:1;transform:translate(-2.2px,0.2px) scale(0.997)}14.79%{opacity:1;transform:translate(-0.4px,0.0px) scale(0.999)}15.45%{opacity:1;transform:translate(-0.0px,0.0px) scale(1.000)}16.00%{opacity:1;transform:translate(-0.0px,0.0px) scale(1.000)}15.60%{opacity:1;transform:translate(0px,-2px) scale(1.05)}16.00%,96%{opacity:1;transform:none}99%,100%{opacity:0}}
+@keyframes f5C2{0%,16%{opacity:0;transform:translate(-534px,105px) scale(.6)}17.43%{opacity:1;transform:translate(-351.6px,50.7px) scale(0.737)}18.86%{opacity:1;transform:translate(-216.4px,22.8px) scale(0.838)}20.40%{opacity:1;transform:translate(-115.3px,8.8px) scale(0.914)}21.94%{opacity:1;transform:translate(-52.0px,3.0px) scale(0.961)}23.48%{opacity:1;transform:translate(-17.5px,0.8px) scale(0.987)}24.80%{opacity:1;transform:translate(-4.3px,0.2px) scale(0.997)}25.79%{opacity:1;transform:translate(-0.7px,0.0px) scale(0.999)}26.45%{opacity:1;transform:translate(-0.1px,0.0px) scale(1.000)}27.00%{opacity:1;transform:translate(-0.0px,0.0px) scale(1.000)}26.60%{opacity:1;transform:translate(0px,-2px) scale(1.05)}27.00%,96%{opacity:1;transform:none}99%,100%{opacity:0}}
+@keyframes f5C3{0%,27%{opacity:0;transform:translate(-270px,-7px) scale(.6)}28.43%{opacity:1;transform:translate(-177.8px,-23.0px) scale(0.737)}29.86%{opacity:1;transform:translate(-109.4px,-22.6px) scale(0.838)}31.40%{opacity:1;transform:translate(-58.3px,-15.4px) scale(0.914)}32.94%{opacity:1;transform:translate(-26.3px,-7.9px) scale(0.961)}34.48%{opacity:1;transform:translate(-8.8px,-2.8px) scale(0.987)}35.80%{opacity:1;transform:translate(-2.2px,-0.7px) scale(0.997)}36.79%{opacity:1;transform:translate(-0.4px,-0.1px) scale(0.999)}37.45%{opacity:1;transform:translate(-0.0px,-0.0px) scale(1.000)}38.00%{opacity:1;transform:translate(-0.0px,-0.0px) scale(1.000)}37.60%{opacity:1;transform:translate(0px,-2px) scale(1.05)}38.00%,96%{opacity:1;transform:none}99%,100%{opacity:0}}
+@keyframes f5C4{0%,38%{opacity:0;transform:translate(-534px,-7px) scale(.6)}39.43%{opacity:1;transform:translate(-351.6px,-23.0px) scale(0.737)}40.86%{opacity:1;transform:translate(-216.4px,-22.6px) scale(0.838)}42.40%{opacity:1;transform:translate(-115.3px,-15.4px) scale(0.914)}43.94%{opacity:1;transform:translate(-52.0px,-7.9px) scale(0.961)}45.48%{opacity:1;transform:translate(-17.5px,-2.8px) scale(0.987)}46.80%{opacity:1;transform:translate(-4.3px,-0.7px) scale(0.997)}47.79%{opacity:1;transform:translate(-0.7px,-0.1px) scale(0.999)}48.45%{opacity:1;transform:translate(-0.1px,-0.0px) scale(1.000)}49.00%{opacity:1;transform:translate(-0.0px,-0.0px) scale(1.000)}48.60%{opacity:1;transform:translate(0px,-2px) scale(1.05)}49.00%,96%{opacity:1;transform:none}99%,100%{opacity:0}}
+@keyframes f5C5{0%,49%{opacity:0;transform:translate(-270px,-135px) scale(.6)}50.43%{opacity:1;transform:translate(-177.8px,-107.3px) scale(0.737)}51.86%{opacity:1;transform:translate(-109.4px,-74.5px) scale(0.838)}53.40%{opacity:1;transform:translate(-58.3px,-43.0px) scale(0.914)}54.94%{opacity:1;transform:translate(-26.3px,-20.3px) scale(0.961)}56.48%{opacity:1;transform:translate(-8.8px,-7.0px) scale(0.987)}57.80%{opacity:1;transform:translate(-2.2px,-1.7px) scale(0.997)}58.79%{opacity:1;transform:translate(-0.4px,-0.3px) scale(0.999)}59.45%{opacity:1;transform:translate(-0.0px,-0.0px) scale(1.000)}60.00%{opacity:1;transform:translate(-0.0px,-0.0px) scale(1.000)}59.60%{opacity:1;transform:translate(0px,-2px) scale(1.05)}60.00%,96%{opacity:1;transform:none}99%,100%{opacity:0}}
+@keyframes f5C6{0%,66%{opacity:0;transform:scale(.85)}70%{opacity:1;transform:scale(1.04)}72%,96%{opacity:1;transform:scale(1)}99%,100%{opacity:0}}
+
+@media(max-width:560px){
+#feature-right-earn .f5-app{left:3%;top:4%;width:42%;height:22%;border-radius:9px;padding:6px;grid-template-rows:12px 1fr}
+#feature-right-earn .f5-app-head span{font-size:6px}
+#feature-right-earn .f5-app-head i{font-size:5.5px}
+#feature-right-earn .f5-need{width:100px;height:26px;margin-top:-13px;font-size:6.5px;border-radius:6px}
+#feature-right-earn .f5-wire{left:85px;top:26%;width:2px;height:9%}
+#feature-right-earn .f5-wall{left:3%;top:30%;width:94%;height:64%;border-radius:11px}
+#feature-right-earn .f5-wall-head{left:8px;right:8px;top:6px;height:18px;gap:5px;padding-bottom:5px}
+#feature-right-earn .f5-wall-head b{font-size:9px}
+#feature-right-earn .f5-wall-head span{font-size:5px}
+#feature-right-earn .f5-live{font-size:5.5px}
+#feature-right-earn .f5-slot{width:157px;height:58px;border-radius:7px}
+#feature-right-earn .f5-slot.s1{left:8px;top:30px}
+#feature-right-earn .f5-slot.s2{left:171px;top:30px}
+#feature-right-earn .f5-slot.s3{left:8px;top:94px}
+#feature-right-earn .f5-slot.s4{left:171px;top:94px}
+#feature-right-earn .f5-slot.s5{left:8px;top:158px}
+#feature-right-earn .f5-slot.s6{left:171px;top:158px}
+#feature-right-earn .f5-chip{width:149px;height:52px;border-radius:6px;padding:5px 6px;gap:3px}
+#feature-right-earn .f5-chip b{font-size:5px;padding:2px 3px}
+#feature-right-earn .f5-chip code{font-size:6.5px}
+#feature-right-earn .f5-chip.c1{left:12px;top:34px}
+#feature-right-earn .f5-chip.c2{left:175px;top:34px}
+#feature-right-earn .f5-chip.c3{left:12px;top:98px}
+#feature-right-earn .f5-chip.c4{left:175px;top:98px}
+#feature-right-earn .f5-chip.c5{left:12px;top:162px}
+#feature-right-earn .f5-chip.c6{left:175px;top:162px}
+#feature-right-earn .f5-chip.c6 span{font-size:6px}
+/* mobile flights: app slot center (82,57); chip centers c1(85,60) c2(249,60) c3(85,124) c4(249,124) c5(85,188) */
+@keyframes f5C1{0%,5%{opacity:0;transform:translate(-11px,-44px) scale(.6)}6.43%{opacity:1;transform:translate(-7.7px,-32.6px) scale(0.737)}7.86%{opacity:1;transform:translate(-4.9px,-21.7px) scale(0.838)}9.40%{opacity:1;transform:translate(-2.7px,-12.2px) scale(0.914)}10.94%{opacity:1;transform:translate(-1.2px,-5.7px) scale(0.961)}12.48%{opacity:1;transform:translate(-0.4px,-1.9px) scale(0.987)}13.80%{opacity:1;transform:translate(-0.1px,-0.5px) scale(0.997)}14.79%{opacity:1;transform:translate(-0.0px,-0.1px) scale(0.999)}15.45%{opacity:1;transform:translate(-0.0px,-0.0px) scale(1.000)}16.00%{opacity:1;transform:translate(-0.0px,-0.0px) scale(1.000)}15.60%{opacity:1;transform:translate(0px,-2px) scale(1.05)}16.00%,96%{opacity:1;transform:none}99%,100%{opacity:0}}
+@keyframes f5C2{0%,16%{opacity:0;transform:translate(-174px,-44px) scale(.6)}17.43%{opacity:1;transform:translate(-114.6px,-32.6px) scale(0.737)}18.86%{opacity:1;transform:translate(-70.5px,-21.7px) scale(0.838)}20.40%{opacity:1;transform:translate(-37.6px,-12.2px) scale(0.914)}21.94%{opacity:1;transform:translate(-16.9px,-5.7px) scale(0.961)}23.48%{opacity:1;transform:translate(-5.7px,-1.9px) scale(0.987)}24.80%{opacity:1;transform:translate(-1.4px,-0.5px) scale(0.997)}25.79%{opacity:1;transform:translate(-0.2px,-0.1px) scale(0.999)}26.45%{opacity:1;transform:translate(-0.0px,-0.0px) scale(1.000)}27.00%{opacity:1;transform:translate(-0.0px,-0.0px) scale(1.000)}26.60%{opacity:1;transform:translate(0px,-2px) scale(1.05)}27.00%,96%{opacity:1;transform:none}99%,100%{opacity:0}}
+@keyframes f5C3{0%,27%{opacity:0;transform:translate(-11px,-108px) scale(.6)}28.43%{opacity:1;transform:translate(-7.7px,-78.3px) scale(0.737)}29.86%{opacity:1;transform:translate(-4.9px,-51.5px) scale(0.838)}31.40%{opacity:1;transform:translate(-2.7px,-28.7px) scale(0.914)}32.94%{opacity:1;transform:translate(-1.2px,-13.3px) scale(0.961)}34.48%{opacity:1;transform:translate(-0.4px,-4.6px) scale(0.987)}35.80%{opacity:1;transform:translate(-0.1px,-1.1px) scale(0.997)}36.79%{opacity:1;transform:translate(-0.0px,-0.2px) scale(0.999)}37.45%{opacity:1;transform:translate(-0.0px,-0.0px) scale(1.000)}38.00%{opacity:1;transform:translate(-0.0px,-0.0px) scale(1.000)}37.60%{opacity:1;transform:translate(0px,-2px) scale(1.05)}38.00%,96%{opacity:1;transform:none}99%,100%{opacity:0}}
+@keyframes f5C4{0%,38%{opacity:0;transform:translate(-174px,-108px) scale(.6)}39.43%{opacity:1;transform:translate(-114.6px,-78.3px) scale(0.737)}40.86%{opacity:1;transform:translate(-70.5px,-51.5px) scale(0.838)}42.40%{opacity:1;transform:translate(-37.6px,-28.7px) scale(0.914)}43.94%{opacity:1;transform:translate(-16.9px,-13.3px) scale(0.961)}45.48%{opacity:1;transform:translate(-5.7px,-4.6px) scale(0.987)}46.80%{opacity:1;transform:translate(-1.4px,-1.1px) scale(0.997)}47.79%{opacity:1;transform:translate(-0.2px,-0.2px) scale(0.999)}48.45%{opacity:1;transform:translate(-0.0px,-0.0px) scale(1.000)}49.00%{opacity:1;transform:translate(-0.0px,-0.0px) scale(1.000)}48.60%{opacity:1;transform:translate(0px,-2px) scale(1.05)}49.00%,96%{opacity:1;transform:none}99%,100%{opacity:0}}
+@keyframes f5C5{0%,49%{opacity:0;transform:translate(-11px,-172px) scale(.6)}50.43%{opacity:1;transform:translate(-7.7px,-125.9px) scale(0.737)}51.86%{opacity:1;transform:translate(-4.9px,-83.2px) scale(0.838)}53.40%{opacity:1;transform:translate(-2.7px,-46.6px) scale(0.914)}54.94%{opacity:1;transform:translate(-1.2px,-21.7px) scale(0.961)}56.48%{opacity:1;transform:translate(-0.4px,-7.4px) scale(0.987)}57.80%{opacity:1;transform:translate(-0.1px,-1.8px) scale(0.997)}58.79%{opacity:1;transform:translate(-0.0px,-0.3px) scale(0.999)}59.45%{opacity:1;transform:translate(-0.0px,-0.0px) scale(1.000)}60.00%{opacity:1;transform:translate(-0.0px,-0.0px) scale(1.000)}59.60%{opacity:1;transform:translate(0px,-2px) scale(1.05)}60.00%,96%{opacity:1;transform:none}99%,100%{opacity:0}}
+}
+
+@media(prefers-reduced-motion:reduce){
+#feature-right-earn .f5cov *{animation:none!important}
+#feature-right-earn .f5-need{display:none!important}
+#feature-right-earn .f5-chip{opacity:1!important;transform:none!important}
+#feature-right-earn .f5-live{color:#248550}
+}
 </style>
 
 <style id="performance-css">
@@ -739,9 +1025,6 @@ body{font-family:Schibsted Critical,Arial,sans-serif}
 @media(prefers-reduced-motion:reduce){.v3-art *{animation:none!important}.v3-art .v3-output,.v3-art .v3-user-result{opacity:1!important;transform:none!important}}
 
 /* F4 - agent shops as the user. 5s loop, transform/opacity only. Ref stage 822x520. */
-#feature-right-native .f4id{position:absolute;inset:0;overflow:hidden;background:#f6f8f5;font-family:Arial,Helvetica,sans-serif;color:#26362c;isolation:isolate}
-#feature-right-native .f4id:before{content:'';position:absolute;inset:0;background-image:linear-gradient(#8aa38b12 1px,transparent 1px),linear-gradient(90deg,#8aa38b12 1px,transparent 1px);background-size:39px 39px}
-#feature-right-native .f4id *{box-sizing:border-box}
 #feature-right-native .f4-inner{position:absolute;inset:0;animation:f4Scene 5s linear infinite}
 
 /* app checkout card */
@@ -897,7 +1180,6 @@ body{font-family:Schibsted Critical,Arial,sans-serif}
 @keyframes f4S3{0%,90%{opacity:0;transform:rotate(0deg) translate(1px,8px) scale(.5)}94%,96%{opacity:1;transform:rotate(0deg) translate(1px,18px) scale(1)}98%,100%{opacity:0}}
 }
 @media(prefers-reduced-motion:reduce){
-#feature-right-native .f4id *{animation:none!important}
 #feature-right-native .f4-guest,#feature-right-native .f4-av-guest,#feature-right-native .f4-p1,#feature-right-native .f4-p2,#feature-right-native .f4-tag1,#feature-right-native .f4-buy-label,#feature-right-native .f4-mini{display:none!important}
 #feature-right-native .f4-signed,#feature-right-native .f4-av-in,#feature-right-native .f4-p3,#feature-right-native .f4-tag2,#feature-right-native .f4-coupon,#feature-right-native .f4-points,#feature-right-native .f4-tray,#feature-right-native .f4-stack span{opacity:1!important;transform:none!important}
 #feature-right-native .f4-orbbody{background:#fff;border-color:rgba(23,32,24,.22)}
@@ -907,9 +1189,6 @@ body{font-family:Schibsted Critical,Arial,sans-serif}
 }
 
 /* F5 - APIs and webhooks cover everything. 5s loop, transform/opacity only. Ref stage 822x520. */
-#feature-right-earn .f5cov{position:absolute;inset:0;overflow:hidden;background:#f6f8f5;font-family:Arial,Helvetica,sans-serif;color:#26362c;isolation:isolate}
-#feature-right-earn .f5cov:before{content:'';position:absolute;inset:0;background-image:linear-gradient(#8aa38b12 1px,transparent 1px),linear-gradient(90deg,#8aa38b12 1px,transparent 1px);background-size:39px 39px}
-#feature-right-earn .f5cov *{box-sizing:border-box}
 #feature-right-earn .f5-inner{position:absolute;inset:0;animation:f5Scene 5s linear infinite}
 
 #feature-right-earn .f5-app{position:absolute;left:4%;top:30%;width:19%;height:40%;background:#fff;border:1px solid #dce4dc;border-radius:13px;box-shadow:0 12px 24px #304b3715;padding:11px;display:grid;grid-template-rows:18px 1fr}
@@ -1003,7 +1282,6 @@ body{font-family:Schibsted Critical,Arial,sans-serif}
 }
 
 @media(prefers-reduced-motion:reduce){
-#feature-right-earn .f5cov *{animation:none!important}
 #feature-right-earn .f5-need{display:none!important}
 #feature-right-earn .f5-chip{opacity:1!important;transform:none!important}
 #feature-right-earn .f5-live{color:#248550}
@@ -1029,7 +1307,6 @@ body{font-family:Schibsted Critical,Arial,sans-serif}
    continuous stack of equally sized scenes. Short viewports use the linear
    mobile sequence instead of compressing or clipping the interaction. */
 .feature-card{overflow:visible}
-.feature-section:not(.is-near) .v3-art *,.feature-section:not(.is-near) .f4id *,.feature-section:not(.is-near) .f5cov *{animation-play-state:paused!important}
 @media (min-width:1024px){
   .feature-card{padding:clamp(96px,12vh,144px) 48px}
   .feature-layout{grid-template-columns:368px minmax(0,880px);gap:80px;max-width:1328px}
@@ -1205,7 +1482,7 @@ body{font-family:Schibsted Critical,Arial,sans-serif}
   </div>
   <div class="f3v7-links"><i class="l1"></i><i class="l2"></i><i class="l3"></i><i class="l4"></i><i class="l5"></i></div>
 </div><div class="mo-progress"><i></i></div></div></section>
-              <section class="feature-view" id="feature-right-native" role="tabpanel" aria-labelledby="feature-left-native" data-view="native"><div class="mo-scene" role="img" aria-label="Agent shopping as the user: avatar merges into the agent, coupon and loyalty points apply, order is placed, admin is absorbed"><div class="f4id"><div class="f4-inner">
+              <section class="feature-view" id="feature-right-native" role="tabpanel" aria-labelledby="feature-left-native" data-view="native"><div class="mo-scene" role="img" aria-label="An agent with its own cursor checks out for the user: signs in, applies coupon and points, places the order, then handles receipt, tracking and returns in its own agent mail while the user's inbox stays at zero"><div class="f4id"><div class="f4-inner">
   <div class="f4-app">
     <div class="f4-app-head"><span>CHECKOUT</span>
       <div class="f4-avslot">
@@ -1242,26 +1519,28 @@ body{font-family:Schibsted Critical,Arial,sans-serif}
     </div>
     <div class="f4-buy"><span class="f4-buy-label">Buy now</span><span class="f4-buy-done">✓ Order placed</span></div>
   </div>
-  <div class="f4-orb"><div class="f4-ring"></div><div class="f4-orbbody"><i>✦</i></div>
-    <div class="f4-stack"><span>✓ RECEIPT</span><span>↗ TRACKING</span><span>↶ RETURNS</span></div>
-  </div>
+  <div class="f4-orb"><div class="f4-ring"></div><div class="f4-orbbody"><i>✦</i></div></div>
   <div class="f4-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c.8-4 3.8-6 7-6s6.2 2 7 6"/></svg></div>
   <div class="f4-fly f4-coupon">COUPON −15%</div>
   <div class="f4-fly f4-points">2,400 PTS</div>
-  <div class="f4-mini f4-m1"><b>✓</b> RECEIPT</div>
-  <div class="f4-mini f4-m2"><b>↗</b> TRACKING</div>
-  <div class="f4-mini f4-m3"><b>↶</b> RETURNS</div>
-  <div class="f4-tray"><span>INBOX</span><i>0</i></div>
+  <div class="f4-cursor"><svg viewBox="0 0 24 24"><path d="M6 3 L20 12 L13.5 13.6 L10.8 20 Z" fill="#26332b" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg><span>agent</span></div>
+  <div class="f4-mail">
+    <div class="f4-mail-head"><span>AGENT MAIL</span><i></i></div>
+    <div class="f4-mrow f4-mr1"><em>✉</em><span>Receipt</span><b>✓ handled</b></div>
+    <div class="f4-mrow f4-mr2"><em>✉</em><span>Tracking update</span><b>✓ handled</b></div>
+    <div class="f4-mrow f4-mr3"><em>✉</em><span>Return label</span><b>✓ handled</b></div>
+  </div>
+  <div class="f4-inbox"><span>YOUR INBOX</span><strong>0</strong></div>
 </div></div><div class="mo-progress"><i></i></div></div></section>
-              <section class="feature-view" id="feature-right-earn" role="tabpanel" aria-labelledby="feature-left-earn" data-view="earn"><div class="mo-scene" role="img" aria-label="App needs answered one by one by flair API endpoints and webhooks, building a full coverage wall"><div class="f5cov"><div class="f5-inner">
+              <section class="feature-view" id="feature-right-earn" role="tabpanel" aria-labelledby="feature-left-earn" data-view="earn"><div class="mo-scene" role="img" aria-label="Shopping needs answered one by one by flair webhooks and API endpoints, building a full coverage wall ending in anything in shopping"><div class="f5cov"><div class="f5-inner">
   <div class="f5-app">
     <div class="f5-app-head"><span>YOUR APP</span><i>needs</i></div>
     <div class="f5-needslot">
       <div class="f5-need n1">track an order</div>
       <div class="f5-need n2">price alerts</div>
       <div class="f5-need n3">returns</div>
-      <div class="f5-need n4">product search</div>
-      <div class="f5-need n5">in-app checkout</div>
+      <div class="f5-need n4">back in stock</div>
+      <div class="f5-need n5">price history</div>
     </div>
   </div>
   <div class="f5-wire"></div>
@@ -1272,8 +1551,8 @@ body{font-family:Schibsted Critical,Arial,sans-serif}
     <div class="f5-chip c1"><b class="wh">WEBHOOK</b><code>shipment.updated</code></div>
     <div class="f5-chip c2"><b class="wh">WEBHOOK</b><code>price.drop</code></div>
     <div class="f5-chip c3"><b class="wh">WEBHOOK</b><code>return.requested</code></div>
-    <div class="f5-chip c4"><b class="api">GET</b><code>/v1/products</code></div>
-    <div class="f5-chip c5"><b class="api">POST</b><code>/v1/checkout</code></div>
+    <div class="f5-chip c4"><b class="wh">WEBHOOK</b><code>inventory.restocked</code></div>
+    <div class="f5-chip c5"><b class="api">GET</b><code>/v1/products/:id/price-history</code></div>
     <div class="f5-chip c6"><span>+ anything in shopping</span></div>
   </div>
 </div></div><div class="mo-progress"><i></i></div></div></section>
@@ -1338,12 +1617,9 @@ const restart=scene=>{
 const now=performance.now();
 if(now-(scene._moRestart||0)<250)return;
 scene._moRestart=now;
-const els=scene.querySelectorAll('*');
-scene.style.animation='none';
-els.forEach(el=>{el.style.animation='none'});
+scene.classList.add('mo-reset');
 void scene.offsetWidth;
-scene.style.animation='';
-els.forEach(el=>{el.style.animation=''});
+scene.classList.remove('mo-reset');
 };
 const io=new IntersectionObserver(entries=>{
 entries.forEach(en=>{
