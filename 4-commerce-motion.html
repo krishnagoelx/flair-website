@@ -473,8 +473,8 @@ html.embedded .triptych.is-paused .cinema-feature:after{animation-play-state:pau
 
 html.embedded .offer-v2:after{display:block;content:'';position:absolute;z-index:25;inset:0;background:#f7fdf8;opacity:0;visibility:hidden;pointer-events:none;animation:handoff-canvas 16s linear infinite}
 @keyframes handoff-canvas{0%,49.9%{opacity:0;visibility:hidden}50%,69.9%{opacity:1;visibility:visible}70%,100%{opacity:0;visibility:hidden}}
-html.embedded .triptych.is-paused .offer-v2:after{animation-play-state:paused!important}
-@media(prefers-reduced-motion:reduce){html.embedded .offer-v2:after{display:none}}
+html.embedded .triptych.is-paused .offer-v2:after{animation-play-state:paused!important} @media(prefers-reduced-motion:reduce){html.embedded .offer-v2:after{display:none}}
+@media(prefers-reduced-motion:reduce){}
 
 /* In-belt metadata is an illustration of searchable fields, not a verified spec for the pictured SKU. */
 html.embedded .graph .product-focus{display:none!important}
@@ -519,7 +519,7 @@ html.embedded .journey-arrival{margin:17px auto 0;padding:10px 12px;max-width:ma
 @keyframes earn-once{0%,67%{opacity:0;transform:translateY(6px)}76%,89%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-4px)}}
 @keyframes shelf-drift{0%,100%{transform:translateX(-50%) translateY(0)}45%{transform:translateX(-50%) translateY(-3px)}}
 @media(prefers-reduced-motion:reduce){.commerce-cinema .cinema-track{animation:none}.commerce-cinema .stream-product{opacity:1!important;transform:none!important}}
-html.embedded .panel .offer-v2:after{display:none!important}
+
 html.embedded .offer-v2 .handoff-plate{position:absolute;z-index:25;inset:0;display:block;background:#fcfffd;pointer-events:none;animation:handoff-plate 16s linear infinite}
 html.embedded .triptych.is-paused .handoff-plate{animation-play-state:paused!important}
 
@@ -650,7 +650,7 @@ html.embedded .triptych > .panel:not(.has-entered) *::before,
 html.embedded .triptych > .panel:not(.has-entered) *::after{animation-play-state:paused!important}
 
 /* Keep the transaction scene under its confirmation and order-tracking overlays. */
-html.embedded .offer-v2 .handoff-plate{display:none!important}
+
 html.embedded .offer-v2 .v2-product,html.embedded .offer-v2 .v2-api,html.embedded .offer-v2 .v2-offers{animation:none!important;opacity:1!important;visibility:visible!important}
 /* Why Flair — an editorial anchor ties title to the card grid. */
 html.embedded .micro-intro{position:relative;max-width:900px;margin-bottom:70px;padding-left:24px;border-left:3px solid #547160}
