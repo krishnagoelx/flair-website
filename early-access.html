@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Get early access to flair. Add shopping to your app." />
+<title>Early access | flair</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23161616'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Arial' font-size='22' font-weight='700' fill='white'%3Ef%3C/text%3E%3C/svg%3E" />
+<style>
+@font-face{font-family:Schibsted Grotesk;src:url(fonts/schibsted-latin.woff2) format("woff2");font-weight:400 600;font-display:swap}
+@font-face{font-family:Bricolage Grotesque;src:url(fonts/bricolage-latin.woff2) format("woff2");font-weight:700;font-display:swap}
+:root{--paper:#f3f3f1;--ink:#161616;--muted:#62625f;--line:rgba(22,22,22,.12);--glass-line:rgba(255,255,255,.62)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:var(--paper);color:var(--ink);font-family:Schibsted Grotesk,Arial,sans-serif;-webkit-font-smoothing:antialiased;display:flex;flex-direction:column}
+.nav{padding:20px 24px}
+.nav a{font-family:Bricolage Grotesque,Arial,sans-serif;font-weight:700;font-size:24px;color:var(--ink);text-decoration:none}
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:24px 20px 72px}
+.card{width:min(100%,520px);padding:clamp(24px,5vw,40px);border:1px solid var(--glass-line);border-radius:16px;background:rgba(255,255,255,.62);box-shadow:0 18px 48px rgba(25,25,23,.08)}
+h1{margin:0 0 12px;font-family:Bricolage Grotesque,Arial,sans-serif;font-weight:700;font-size:clamp(30px,6vw,40px);line-height:1.05;letter-spacing:-.02em}
+.sub{margin:0 0 28px;color:var(--muted);font-size:16px;line-height:1.5}
+label{display:block;margin:0 0 16px;font-size:14px;font-weight:500}
+label small{color:var(--muted);font-weight:400}
+input,textarea{display:block;width:100%;margin-top:6px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:#ffffffd9;color:var(--ink);font:inherit;font-size:16px;outline:none}
+input:focus,textarea:focus{border-color:var(--ink)}
+textarea{min-height:84px;resize:vertical}
+button{width:100%;min-height:50px;margin-top:8px;border:1px solid #ffffff29;border-radius:12px;background:var(--ink);color:#fff;font:inherit;font-size:15px;font-weight:500;cursor:pointer;box-shadow:inset 0 1px #ffffff24,0 9px 24px #1616161a;transition:transform .16s cubic-bezier(.23,1,.32,1)}
+button:active{transform:scale(.98)}
+button[disabled]{opacity:.6;cursor:default}
+.hp{position:absolute;left:-9999px;opacity:0}
+.msg{margin:14px 0 0;font-size:14px;color:var(--muted)}
+.done{display:none;text-align:left}
+.done h1{font-size:clamp(26px,5vw,34px)}
+.is-done form,.is-done .head{display:none}.is-done .done{display:block}
+</style>
+</head>
+<body>
+<header class="nav"><a href="/">flair</a></header>
+<main>
+<div class="card" id="card">
+<div class="head">
+<h1>get early access to flair</h1>
+<p class="sub">add shopping to your app. SDK, API, integration support from us directly.</p>
+</div>
+<form id="f" novalidate>
+<label>email<input type="email" name="email" autocomplete="email" required placeholder="you@company.com" /></label>
+<label>company<input type="text" name="company" autocomplete="organization" required /></label>
+<label>what are you building? <small>(optional)</small><textarea name="building"></textarea></label>
+<label>phone <small>(optional)</small><input type="tel" name="phone" autocomplete="tel" /></label>
+<input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+<button type="submit" id="b">request access</button>
+<p class="msg" id="m" role="status"></p>
+</form>
+<div class="done"><h1>you're on the list</h1><p class="sub">we'll reach out within 24 hours.</p></div>
+</div>
+</main>
+<script>
+var ENDPOINT="https://api.web3forms.com/submit",KEY="9eed822d-b37a-45b3-8f12-0720ef11590a";
+var f=document.getElementById("f"),b=document.getElementById("b"),m=document.getElementById("m");
+f.addEventListener("submit",function(e){
+e.preventDefault();
+var d=new FormData(f);
+if(d.get("website"))return;
+var email=(d.get("email")||"").trim(),company=(d.get("company")||"").trim();
+if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){m.textContent="enter a valid email";return}
+if(!company){m.textContent="enter your company";return}
+b.disabled=true;m.textContent="";
+fetch(ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify({access_key:KEY,subject:"flair early access: "+company,from_name:"flair early access",email:email,company:company,building:d.get("building")||"",phone:d.get("phone")||"",source:location.pathname})})
+.then(function(r){return r.json()}).then(function(j){
+if(!j.success)throw new Error();
+document.getElementById("card").classList.add("is-done");
+}).catch(function(){b.disabled=false;m.textContent="something went wrong, try again or email hello@addflair.dev"});
+});
+</script>
+</body>
+</html>
